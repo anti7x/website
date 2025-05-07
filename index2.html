@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #2c003e, #4b0082);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+            width: 300px;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            font-style: italic;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            background: #8a2be2;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #7a1fbb;
+        }
+        .logout {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <button class="logout" onclick="logout()">Logout</button>
+    <div class="container">
+        <h1>Welcome, <span id="username"></span></h1>
+        <p id="quote">"This is your daily quote. Change it as needed."</p>
+        <div class="button-container">
+            <button onclick="enterSite()">Enter</button>
+        </div>
+    </div>
+
+    <script>
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i].trim();
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+            }
+            return null;
+        }
+
+        function logout() {
+            document.cookie = "loggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "index.html";
+        }
+
+        function enterSite() {
+            window.location.href = "index3.html";
+        }
+
+        // Security check: Redirect to login if not authenticated
+        if (getCookie("loggedIn") !== "true") {
+            window.location.href = "index.html";
+        } else {
+            document.getElementById("username").innerText = getCookie("username") || "User";
+        }
+    </script>
+</body>
+</html>

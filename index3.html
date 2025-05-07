@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relax Lea Everything Is Okay</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #2c003e, #4b0082);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: filter 0.5s ease-in-out;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+            width: 90%;
+            max-width: 800px;
+        }
+        h1 {
+            margin-bottom: 15px;
+            font-size: 26px;
+        }
+        .poem {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 25px;
+            white-space: pre-wrap; /* Preserve line breaks */
+            max-height: 70vh; /* Allow scrolling if poem is long */
+            overflow-y: scroll; /* Make the small box scrollable */
+            padding-right: 20px; /* Prevent text from being cut off */
+        }
+        /* Custom scroll bar for the .poem box */
+        .poem::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .poem::-webkit-scrollbar-thumb {
+            background-color: #8a2be2; /* Purple thumb to match the theme */
+            border-radius: 10px;
+        }
+
+        .poem::-webkit-scrollbar-track {
+            background-color: #4b0082; /* Dark purple track */
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        button {
+            background: #8a2be2;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #7a1fbb;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 30px;
+            }
+            h1 {
+                font-size: 22px;
+            }
+            .poem {
+                font-size: 16px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Check back daily for poem updates!</h1>
+        <div class="poem" id="poem">
+            When the days are tough and the moments feel long,
+Know you're not alone, you’ve always been strong.
+Though your body may ache and the road seem unclear,
+You’ve got the strength to face it, I’m always near.
+
+With every challenge, you stand tall and brave,
+Fighting through the storms, every wave you brave.
+The hard times will pass, the pain will subside,
+And you’ll rise again, with courage as your guide.
+
+There’s power in you, quiet and bright,
+More than you realize, you’re full of light.
+When it feels overwhelming, and you start to sway,
+I’m here for you, every step of the way.
+
+No moment too dark, no pain too deep,
+I’m with you always, even in your sleep.
+You’re stronger than you know, with every breath,
+And I’ll stand by you, through every step.
+        </div>
+        <div class="button-container">
+            <button onclick="goBack()">Go Back</button>
+        </div>
+    </div>
+
+    <!-- Audio for looping music -->
+    <audio id="background-music" loop>
+        <source src="Light.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i].trim();
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+            }
+            return null;
+        }
+
+        function goBack() {
+            window.location.href = "index2.html";
+        }
+
+        // Security check: Redirect if not logged in
+        if (getCookie("loggedIn") === "true") {
+            // No blur is applied
+        } else {
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1500); // 1.5-second delay before redirecting
+        }
+
+        // Try to enable audio after user interaction (click or tap anywhere)
+        let audio = document.getElementById("background-music");
+
+        document.body.addEventListener("click", function() {
+            audio.play();
+        });
+
+        // For mobile devices, we also want to start the audio with the first tap on the screen
+        if (audio) {
+            audio.muted = false;  // Unmute the audio to ensure it plays
+        }
+    </script>
+</body>
+</html>
